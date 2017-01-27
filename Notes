@@ -1,0 +1,28 @@
+PLAYING SPACE:
+
+		28 * 98
+		 starting at 41,15
+COORDINATES:
+			BOX dimensions: 30*100
+			40,14               40,113
+
+
+
+
+			69,14		    69,113
+
+SYMBOLS:
+
+			▲
+			●
+			▶
+			▼
+			◀
+			◌
+
+
+DIRECTIONS:
+
+				^[[A
+			^[[D		^[[C
+				^[[B
