@@ -124,11 +124,11 @@ public:
 		initial=time(NULL);
 		inital_parameter();
 		system("clear");
-		wait_time(1);
+		// wait_time(1);
 		game_display();
-		game_movement();
-		wait_time(1);
-		game_display();
+		// game_movement();
+		// wait_time(1);
+		// game_display();
 	}
 
 	void inital_parameter()
@@ -242,7 +242,7 @@ public:
 		system("clear");
 		for(int i=0;i<21;i++)
 			cout<<endl;
-		cout<<"\t\t\t\t\t\t\t\t\tUse W/A/S/D to control the snake"<<endl<<endl<<endl<<"\t\t\t\t\tThe aim is to make the snake eat as many treats as possible without making it eat itself or the border";
+		cout<<"\t\t\t\t\t\t\t\t\tUse W/A/S/D to control Rohit, the snake"<<endl<<endl<<endl<<"\t\t\t\t\tThe aim is to make Rohit eat as many treats as possible without making him eat itself or the border";
 		cout<<endl<<endl<<endl<<"\t\t\t\t\t\t\t\t\tPress anything to continue...";
 		char c=getch();
 		if(c){

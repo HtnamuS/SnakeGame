@@ -1,27 +1,41 @@
-#include<iostream>
-#include"getch.h"
-#include<time.h>
+#include <stdio.h>
+#include <termios.h>
+#include <unistd.h>
+#include <fcntl.h>
 
-using namespace std;
-
-void wait_time(int wait_t)
+int kbhit(void)
 {
-	time_t curr=time(NULL);
-	time_t nav_t=time(NULL);
-	while(1){
-		if (nav_t-curr==wait_t) {
-			break;
-		}
-		else
-			nav_t=time(NULL);
-	}
+  struct termios oldt, newt;
+  int ch;
+  int oldf;
+
+  tcgetattr(STDIN_FILENO, &oldt);
+  newt = oldt;
+  newt.c_lflag &= ~(ICANON | ECHO);
+  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+  oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+  fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+
+  ch = getchar();
+
+  tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+  fcntl(STDIN_FILENO, F_SETFL, oldf);
+
+  if(ch != EOF)
+  {
+    ungetc(ch, stdin);
+    return 1;
+  }
+
+  return 0;
 }
 
-int main()
+int main(void)
 {
 	int i=0;
-	while(1){
-		cout<<"Hi"<<endl;
-		wait_time(1);
-	}
+  while(!kbhit())
+  if(i==0){
+    puts("Press a key!");i++;}
+  printf("You pressed '%c'!\n", getchar());
+  return 0;
 }
