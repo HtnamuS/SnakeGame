@@ -33,3 +33,4 @@ highscores	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/ht_snake.cpp	/^
 location_disp	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/ht_snake.cpp	/^	void location_disp()$/;"	function	line:280	class:TheGame	signature:()
 box	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/ht_snake.cpp	/^	void box()$/;"	function	line:293	class:TheGame	signature:()
 main	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/ht_snake.cpp	/^int main()$/;"	function	line:319	signature:()
+kbhit	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/kbhit.h	/^int kbhit(void)$/;"	function	line:6	signature:(void)
