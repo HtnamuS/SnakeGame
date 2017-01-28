@@ -8,6 +8,10 @@
 #include "kbhit.h"
 
 #define getoxy gotoxy
+#define UP 1
+#define DOWN 3
+#define LEFT 2
+#define RIGHT 4
 
 using namespace std;
 
@@ -32,20 +36,17 @@ public:
 	struct snake_body* start;
 	struct trt* treat;
 
-	TheGame()
-	{
+	TheGame(){
 		pointer_pos=initial_pos=23;
 		treat=(struct trt*)malloc(sizeof(struct trt));
 	}
 
-	void pointer()
-	{
+	void pointer(){
 		gotoxy(81,pointer_pos);
 		cout<<"->";
 	}
 
-	/*void preoptions()    //FUNCTION THAT USES DIRECTION ARROWS. INCOMPLETE. FOR LATER
-	{
+	/*void preoptions(){ //FUNCTION THAT USES DIRECTION ARROWS. INCOMPLETE. FOR LATER
 		gotoxy(-1,-1);
 		cout<<"\t\t\t\tNew Game"<<endl<<"\t\t\t\tControls"<<endl<<"\t\t\t\tHighscores"<<endl<<"\t\t\t\tExit"<<endl;
 		pointer(1);
@@ -69,8 +70,7 @@ public:
 		}
 	}*/
 
-	void preoptions()    //FUNCTION THAT USES W/A/S/D
-	{
+	void preoptions(){ //FUNCTION THAT USES W/A/S/D
 		system("clear");
 		gotoxy(-1,-1);
 		for(int i=0;i<22;i++)
@@ -120,20 +120,22 @@ public:
 		}
 	}
 
-	void run_game()
-	{
-		initial=time(NULL);
-		inital_parameter();
-		system("clear");
+	void run_game(){
+		// initial=time(NULL);
+		// inital_parameter();
+		// system("clear");
+		box();
+		cout<<"Hi"<<endl;
 		// wait_time(1);
-		game_display();
-		// game_movement();
+		//location_disp();
+		//game_display();
+		//game_movement();
+		//location_disp();
 		// wait_time(1);
 		// game_display();
 	}
 
-	void inital_parameter()
-	{
+	void inital_parameter(){
 		struct snake_body* p;
 		start=p=(struct snake_body*)malloc(sizeof(struct snake_body));
 		p->x= rand()%80+10+40;
@@ -143,14 +145,12 @@ public:
 		new_treat_pos();
 	}
 
-	void new_treat_pos()
-	{
+	void new_treat_pos(){
 		treat->x=rand()%98+41;
 		treat->y=rand()%28+15;
 	}
 
-	void game_display()
-	{
+	void game_display(){
 		box();
 		snake_head_up();
 		snake_bodypart(2);
@@ -158,14 +158,12 @@ public:
 		disp_treat();
 	}
 
-	void snake_head_up()
-	{
+	void snake_head_up(){
 		gotoxy(start->x,start->y);
 		cout<<"▲";
 	}
 
-	void snake_bodypart(int n)
-	{
+	void snake_bodypart(int n){
 		n=n-2;
 		struct snake_body* p;
 		struct snake_body* nav;
@@ -183,8 +181,7 @@ public:
 		cout<<"●";
 	}
 
-	void disp_treat()
-	{
+	void disp_treat(){
 		while(check_intersection(treat->x,treat->y)){
 			new_treat_pos();
 		}
@@ -192,8 +189,7 @@ public:
 		cout<<"◌";
 	}
 
-	int check_intersection(int x,int y)
-	{
+	int check_intersection(int x,int y){
 		struct snake_body* nav=start;
 		while(1){
 			if(nav->x==x||nav->y==y)
@@ -207,8 +203,7 @@ public:
 		}
 	}
 
-	void game_movement()
-	{
+	void game_movement(){
 		struct snake_body* nav=start;
 		int temp_x=nav->x,temp_y=nav->y;
 		nav->y++;
@@ -225,8 +220,7 @@ public:
 		initial=time(NULL);
 	}
 
-	void wait_time(int wait_t)
-	{
+	void wait_time(int wait_t){
 		time_t curr=time(NULL);
 		time_t nav_t=time(NULL);
 		while(1){
@@ -238,8 +232,7 @@ public:
 		}
 	}
 
-	void controls()
-	{
+	void controls({
 		system("clear");
 		for(int i=0;i<21;i++)
 			cout<<endl;
@@ -251,8 +244,7 @@ public:
 		}
 	}
 
-	void highscores()//MAX name of 8 characters
-	{
+	void highscores(){//MAX name of 8 characters
 		system("clear");
 		gotoxy(80,18);
 		cout<<"NAME\t\tSCORE";
@@ -274,14 +266,13 @@ public:
 	 	}
 		cout<<endl<<endl<<endl<<endl<<"\t\t\t\t\t\t\t\t\t     Press anything to continue...";
 		char c;
-		if(c= getch()){
+		if(getch())
 		{
 			preoptions();
 		}
 	}
 
-	void location_disp()
-	{
+	void location_disp(){
 		system("clear");
 		struct snake_body* nav=start;
 		while(1){
@@ -293,8 +284,7 @@ public:
 		}
 	}
 
-	void box()
-	{
+	void box(){
 		system("clear");
 		gotoxy(40,14);
 		int l=30;
@@ -319,10 +309,9 @@ public:
 	}
 };
 
-int main()
-{
+int main(){
 	srand(time(NULL));
-	TheGame theGame;
-	theGame.preoptions();
-	cout<<endl;
+	TheGame newgame;
+	newgame.preoptions();
+	gotoxy(0,0);
 }
