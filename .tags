@@ -1,5 +1,3 @@
-kbhit	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/trial.cpp	/^int kbhit(void)$/;"	function	line:6	signature:(void)
-main	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/trial.cpp	/^int main(void)$/;"	function	line:33	signature:(void)
 getoxy	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/ht_snake.cpp	/^#define getoxy /;"	macro	line:9	file:
 TheGame	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/ht_snake.cpp	/^class TheGame$/;"	class	line:13	file:
 pointer_pos	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/ht_snake.cpp	/^	int pointer_pos,initial_pos;$/;"	member	line:17	class:TheGame	file:
@@ -34,3 +32,4 @@ location_disp	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/ht_snake.cpp
 box	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/ht_snake.cpp	/^	void box()$/;"	function	line:293	class:TheGame	signature:()
 main	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/ht_snake.cpp	/^int main()$/;"	function	line:319	signature:()
 kbhit	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/kbhit.h	/^int kbhit(void)$/;"	function	line:6	signature:(void)
+main	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/trial.cpp	/^int main(void)$/;"	function	line:6	signature:(void)

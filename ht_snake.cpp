@@ -5,6 +5,7 @@
 #include "got.h"
 #include"getch.h"
 #include"swap.h"
+#include "kbhit.h"
 
 #define getoxy gotoxy
 
@@ -268,10 +269,12 @@ public:
 					gotoxy(80,20+i);
 					cout<<"----"<<"\t\t"<<" ----";
 				}
+				break;
 			}
 	 	}
 		cout<<endl<<endl<<endl<<endl<<"\t\t\t\t\t\t\t\t\t     Press anything to continue...";
-		if(char c=getch())
+		char c;
+		if(c= getch()){
 		{
 			preoptions();
 		}

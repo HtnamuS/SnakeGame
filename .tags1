@@ -4,4 +4,4 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-kbhit	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/kbhit.h	/^int kbhit(void)$/;"	function	line:6	signature:(void)
+main	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/trial.cpp	/^int main(void)$/;"	function	line:6	signature:(void)
