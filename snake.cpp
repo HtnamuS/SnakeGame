@@ -121,13 +121,14 @@ public:
 	}
 
 	void run_game(){
-		// initial=time(NULL);
-		// inital_parameter();
-		// system("clear");
-		box();
-		cout<<"Hi"<<endl;
+		initial=time(NULL);
+		inital_parameter();
+		system("clear");
+		gotoxy(0,0);
 		// wait_time(1);
-		//location_disp();
+		cout<<"Hi"<<endl;
+		gotoxy(0,1);
+		location_disp();
 		//game_display();
 		//game_movement();
 		//location_disp();
@@ -232,7 +233,7 @@ public:
 		}
 	}
 
-	void controls({
+	void controls(){
 		system("clear");
 		for(int i=0;i<21;i++)
 			cout<<endl;
@@ -273,7 +274,6 @@ public:
 	}
 
 	void location_disp(){
-		system("clear");
 		struct snake_body* nav=start;
 		while(1){
 			cout<<nav->x<<'\t'<<nav->y<<endl;
@@ -312,6 +312,6 @@ public:
 int main(){
 	srand(time(NULL));
 	TheGame newgame;
-	newgame.preoptions();
-	gotoxy(0,0);
+	newgame.inital_parameter();
+	
 }
