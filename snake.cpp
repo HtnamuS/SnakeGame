@@ -123,17 +123,12 @@ public:
 	void run_game(){
 		initial=time(NULL);
 		inital_parameter();
-		system("clear");
-		gotoxy(0,0);
-		// wait_time(1);
-		cout<<"Hi"<<endl;
-		gotoxy(0,1);
-		location_disp();
+		gotoxy(0,2);
+		game_display();
+		//game_movement(UP);
+		//initial=time(NULL);
 		//game_display();
-		//game_movement();
-		//location_disp();
-		// wait_time(1);
-		// game_display();
+		getoxy(0,100);
 	}
 
 	void inital_parameter(){
@@ -144,6 +139,8 @@ public:
 		start->prev=NULL;
 		start->next=NULL;
 		new_treat_pos();
+		snake_bodypart(2);
+		snake_bodypart(3);
 	}
 
 	void new_treat_pos(){
@@ -154,8 +151,8 @@ public:
 	void game_display(){
 		box();
 		snake_head_up();
-		snake_bodypart(2);
-		snake_bodypart(3);
+		snake_bodypart_disp(2);
+		snake_bodypart_disp(3);
 		disp_treat();
 	}
 
@@ -178,7 +175,16 @@ public:
 		p->y=nav->y+1;
 		p->prev=nav;
 		p->next=NULL;
-		gotoxy(p->x,p->y);
+	}
+
+	void snake_bodypart_disp(int n){
+		n=n+21;
+		struct snake_body* nav;
+		nav=start;
+		for(int i=0;i<n;i++){
+			nav=start->next;
+		}
+		gotoxy(nav->x,nav->y);
 		cout<<"●";
 	}
 
@@ -204,10 +210,17 @@ public:
 		}
 	}
 
-	void game_movement(){
+	void game_movement (int dir){
 		struct snake_body* nav=start;
 		int temp_x=nav->x,temp_y=nav->y;
-		nav->y++;
+		if(dir==UP)
+			nav->y--;
+		else if(dir==DOWN)
+			nav->y++;
+		else if(dir==LEFT)
+			nav->x--;
+		else if(dir==RIGHT)
+			nav->x++;
 		nav=nav->next;
 		while(1){
 			swap(&temp_x,&nav->x);
@@ -218,7 +231,6 @@ public:
 				nav=nav->next;
 		}
 		for(time_t curr=time(NULL);curr==initial+1;curr=time(NULL));
-		initial=time(NULL);
 	}
 
 	void wait_time(int wait_t){
@@ -312,6 +324,5 @@ public:
 int main(){
 	srand(time(NULL));
 	TheGame newgame;
-	newgame.inital_parameter();
-	
+	newgame.run_game();
 }

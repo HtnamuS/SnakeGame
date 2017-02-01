@@ -4,4 +4,41 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-main	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/trial.cpp	/^int main(void)$/;"	function	line:6	signature:(void)
+getoxy	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^#define getoxy /;"	macro	line:10	file:
+UP	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^#define UP /;"	macro	line:11	file:
+DOWN	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^#define DOWN /;"	macro	line:12	file:
+LEFT	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^#define LEFT /;"	macro	line:13	file:
+RIGHT	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^#define RIGHT /;"	macro	line:14	file:
+TheGame	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^class TheGame$/;"	class	line:18	file:
+pointer_pos	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	int pointer_pos,initial_pos;$/;"	member	line:22	class:TheGame	file:
+initial_pos	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	int pointer_pos,initial_pos;$/;"	member	line:22	class:TheGame	file:
+initial	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	time_t initial;$/;"	member	line:23	class:TheGame	file:
+snake_body	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	struct snake_body{$/;"	struct	line:26	class:TheGame	file:
+x	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^		int x,y;$/;"	member	line:27	struct:TheGame::snake_body	file:
+y	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^		int x,y;$/;"	member	line:27	struct:TheGame::snake_body	file:
+next	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^		struct snake_body* next;$/;"	member	line:28	struct:TheGame::snake_body	typeref:struct:TheGame::snake_body::snake_body	file:
+prev	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^		struct snake_body* prev;$/;"	member	line:29	struct:TheGame::snake_body	typeref:struct:TheGame::snake_body::snake_body	file:
+trt	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	struct trt{$/;"	struct	line:32	class:TheGame	file:
+x	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^		int x,y;$/;"	member	line:33	struct:TheGame::trt	file:
+y	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^		int x,y;$/;"	member	line:33	struct:TheGame::trt	file:
+start	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	struct snake_body* start;$/;"	member	line:36	class:TheGame	typeref:struct:TheGame::snake_body	file:
+treat	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	struct trt* treat;$/;"	member	line:37	class:TheGame	typeref:struct:TheGame::trt	file:
+TheGame	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	TheGame(){$/;"	function	line:39	class:TheGame	signature:()
+pointer	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void pointer(){$/;"	function	line:44	class:TheGame	signature:()
+preoptions	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void preoptions(){ \/\/FUNCTION THAT USES W\/A\/S\/D$/;"	function	line:73	class:TheGame	signature:()
+run_game	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void run_game(){$/;"	function	line:123	class:TheGame	signature:()
+inital_parameter	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void inital_parameter(){$/;"	function	line:140	class:TheGame	signature:()
+new_treat_pos	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void new_treat_pos(){$/;"	function	line:150	class:TheGame	signature:()
+game_display	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void game_display(){$/;"	function	line:155	class:TheGame	signature:()
+snake_head_up	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void snake_head_up(){$/;"	function	line:163	class:TheGame	signature:()
+snake_bodypart	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void snake_bodypart(int n){$/;"	function	line:168	class:TheGame	signature:(int n)
+snake_bodypart_disp	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void snake_bodypart_disp(int n){$/;"	function	line:186	class:TheGame	signature:(int n)
+disp_treat	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void disp_treat(){$/;"	function	line:193	class:TheGame	signature:()
+check_intersection	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	int check_intersection(int x,int y){$/;"	function	line:201	class:TheGame	signature:(int x,int y)
+game_movement	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void game_movement(){$/;"	function	line:215	class:TheGame	signature:()
+wait_time	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void wait_time(int wait_t){$/;"	function	line:231	class:TheGame	signature:(int wait_t)
+controls	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void controls(){$/;"	function	line:243	class:TheGame	signature:()
+highscores	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void highscores(){\/\/MAX name of 8 characters$/;"	function	line:255	class:TheGame	signature:()
+location_disp	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void location_disp(){$/;"	function	line:283	class:TheGame	signature:()
+box	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^	void box(){$/;"	function	line:294	class:TheGame	signature:()
+main	/Users/Htnamus/All Stuff/Programming Stuff/Snake Game/snake.cpp	/^int main(){$/;"	function	line:319	signature:()

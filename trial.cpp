@@ -2,13 +2,12 @@
 #include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "swap.h"
 
 int main(void)
 {
-	int i=0;
-  while(!kbhit())
-  if(i==0){
-    puts("Press a key!");i++;}
-  printf("You pressed '%c'!\n", getchar());
-  return 0;
+	int i=0,j=3;
+	std::cout <<i<<endl<<j<< '\n';
+	swap(&i,&j);
+	std::cout <<i<<endl<<j<<'\n';
 }
