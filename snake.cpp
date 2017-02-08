@@ -2,6 +2,8 @@
 #include<fstream>
 #include <time.h>
 #include <stdlib.h>
+#include <chrono>
+#include <thread>
 #include "got.h"
 #include"getch.h"
 #include"swap.h"
@@ -13,15 +15,13 @@
 #define LEFT 2
 #define RIGHT 4
 
-using namespace std;
-
 class TheGame
 {
 public:
 
 	int pointer_pos,initial_pos;
 	time_t initial;
-
+	int no,dir;
 
 	struct snake_body{
 		int x,y;
@@ -43,12 +43,12 @@ public:
 
 	void pointer(){
 		gotoxy(81,pointer_pos);
-		cout<<"->";
+		std::cout<<"->";
 	}
 
 	/*void preoptions(){ //FUNCTION THAT USES DIRECTION ARROWS. INCOMPLETE. FOR LATER
 		gotoxy(-1,-1);
-		cout<<"\t\t\t\tNew Game"<<endl<<"\t\t\t\tControls"<<endl<<"\t\t\t\tHighscores"<<endl<<"\t\t\t\tExit"<<endl;
+		std::cout<<"\t\t\t\tNew Game"<<endl<<"\t\t\t\tControls"<<endl<<"\t\t\t\tHighscores"<<endl<<"\t\t\t\tExit"<<endl;
 		pointer(1);
 		int x;
 		if (getch() == '^[') { // if the first value is esc
@@ -74,8 +74,8 @@ public:
 		system("clear");
 		gotoxy(-1,-1);
 		for(int i=0;i<22;i++)
-			cout<<endl;
-		cout<<"\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\bNew Game"<<endl<<"\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\bControls"<<endl<<"\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\bHighscores"<<endl<<"\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\bExit"<<endl<<endl<<endl<<"\t\t\t\t\t\t\t\t\t\b\b\b\b\bNote: Use W/A/S/D to control the arrow";
+			std::cout<<endl;
+		std::cout<<"\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\bNew Game"<<endl<<"\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\bControls"<<endl<<"\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\bHighscores"<<endl<<"\t\t\t\t\t\t\t\t\t\t\t\b\b\b\b\bExit"<<endl<<endl<<endl<<"\t\t\t\t\t\t\t\t\t\b\b\b\b\bNote: Use W/A/S/D to control the arrow";
 		pointer();
 		char c;
 		c=getch();
@@ -85,7 +85,7 @@ public:
 				preoptions();
 			 }
 			else{
-				cout<<'\a';
+				std::cout<<'\a';
 				preoptions();
 			}
 		}
@@ -95,7 +95,7 @@ public:
 				preoptions();
 			}
 			else{
-				cout<<'\a';
+				std::cout<<'\a';
 				preoptions();
 			}
 		}
@@ -115,7 +115,7 @@ public:
 			}
 		}
 		else{
-			cout<<'\a';
+			std::cout<<'\a';
 			preoptions();
 		}
 	}
@@ -125,19 +125,26 @@ public:
 		inital_parameter();
 		gotoxy(0,2);
 		game_display();
-		//game_movement(UP);
-		//initial=time(NULL);
-		//game_display();
+		//location_disp();
+		//game_movement();
+		//wait_time(1);
+		usleep(1000000);
+		game_movement();
+
+		//location_disp();
+		game_display();
 		getoxy(0,100);
 	}
 
 	void inital_parameter(){
+		dir=UP;
 		struct snake_body* p;
 		start=p=(struct snake_body*)malloc(sizeof(struct snake_body));
 		p->x= rand()%80+10+40;
 		p->y=rand()%10+10+14;
 		start->prev=NULL;
 		start->next=NULL;
+		no=2;
 		new_treat_pos();
 		snake_bodypart(2);
 		snake_bodypart(3);
@@ -151,14 +158,14 @@ public:
 	void game_display(){
 		box();
 		snake_head_up();
-		snake_bodypart_disp(2);
-		snake_bodypart_disp(3);
+		//snake_bodypart_disp(no);
+		//snake_bodypart_disp(no);
 		disp_treat();
 	}
 
 	void snake_head_up(){
 		gotoxy(start->x,start->y);
-		cout<<"▲";
+		std::cout<<"▲";
 	}
 
 	void snake_bodypart(int n){
@@ -168,7 +175,7 @@ public:
 		p=(struct snake_body*)malloc(sizeof(struct snake_body));
 		nav=start;
 		for(int i=0;i<n;i++){
-			nav=start->next;
+			nav=nav->next;
 		}
 		nav->next=p;
 		p->x=nav->x;
@@ -178,14 +185,15 @@ public:
 	}
 
 	void snake_bodypart_disp(int n){
-		n=n+21;
+		n=n-1;
 		struct snake_body* nav;
 		nav=start;
 		for(int i=0;i<n;i++){
-			nav=start->next;
+			nav=nav->next;
 		}
 		gotoxy(nav->x,nav->y);
-		cout<<"●";
+		std::cout<<"●";
+		no++;
 	}
 
 	void disp_treat(){
@@ -193,7 +201,7 @@ public:
 			new_treat_pos();
 		}
 		getoxy(treat->x,treat->y);
-		cout<<"◌";
+		std::cout<<"◌";
 	}
 
 	int check_intersection(int x,int y){
@@ -210,7 +218,7 @@ public:
 		}
 	}
 
-	void game_movement (int dir){
+	void game_movement (){
 		struct snake_body* nav=start;
 		int temp_x=nav->x,temp_y=nav->y;
 		if(dir==UP)
@@ -240,17 +248,19 @@ public:
 			if (nav_t-curr==wait_t) {
 				break;
 			}
-			else
+			else{
 				nav_t=time(NULL);
+				game_display();
+			}
 		}
 	}
 
 	void controls(){
 		system("clear");
 		for(int i=0;i<21;i++)
-			cout<<endl;
-		cout<<"\t\t\t\t\t\t\t\t\tUse W/A/S/D to control Rohit, the snake"<<endl<<endl<<endl<<"\t\t\t\t\tThe aim is to make Rohit eat as many treats as possible without making him eat itself or the border";
-		cout<<endl<<endl<<endl<<"\t\t\t\t\t\t\t\t\tPress anything to continue...";
+			std::cout<<endl;
+		std::cout<<"\t\t\t\t\t\t\t\t\tUse W/A/S/D to control Rohit, the snake"<<endl<<endl<<endl<<"\t\t\t\t\tThe aim is to make Rohit eat as many treats as possible without making him eat itself or the border";
+		std::cout<<endl<<endl<<endl<<"\t\t\t\t\t\t\t\t\tPress anything to continue...";
 		char c=getch();
 		if(c){
 			preoptions();
@@ -260,7 +270,7 @@ public:
 	void highscores(){//MAX name of 8 characters
 		system("clear");
 		gotoxy(80,18);
-		cout<<"NAME\t\tSCORE";
+		std::cout<<"NAME\t\tSCORE";
 		fstream hscores;
 		hscores.open("ht_highscores.txt");
 		int scores[5]={};
@@ -268,16 +278,16 @@ public:
 		for(int i=0;i<5;i++){
 			gotoxy(80,20+i);
 			hscores>>names[i]>>scores[i];
-			cout<<names[i]<<"\t\t\t"<<scores[i];
+			std::cout<<names[i]<<"\t\t\t"<<scores[i];
 			if(hscores.eof()){
 				for(;i<5;i++){
 					gotoxy(80,20+i);
-					cout<<"----"<<"\t\t"<<" ----";
+					std::cout<<"----"<<"\t\t"<<" ----";
 				}
 				break;
 			}
 	 	}
-		cout<<endl<<endl<<endl<<endl<<"\t\t\t\t\t\t\t\t\t     Press anything to continue...";
+		std::cout<<endl<<endl<<endl<<endl<<"\t\t\t\t\t\t\t\t\t     Press anything to continue...";
 		char c;
 		if(getch())
 		{
@@ -288,7 +298,7 @@ public:
 	void location_disp(){
 		struct snake_body* nav=start;
 		while(1){
-			cout<<nav->x<<'\t'<<nav->y<<endl;
+			std::cout<<nav->x<<'\t'<<nav->y<<endl;
 			if(nav->next==NULL)
 				break;
 			else
@@ -302,21 +312,21 @@ public:
 		int l=30;
 		int b=100;
 		for(int i=0;i<b;i++){
-			cout<<"#";
+			std::cout<<"#";
 		}
-		cout<<endl;
+		std::cout<<endl;
 		int i;
 		for(i=0;i<l-2;i++){
 			gotoxy(40,15+i);
-			cout<<"#";
+			std::cout<<"#";
 			for(int j=0;j<b-2;j++){
-				cout<<" ";
+				std::cout<<" ";
 			}
-			cout<<"#"<<endl;
+			std::cout<<"#"<<endl;
 		}
 		gotoxy(40,15+i);
 		for(int j=0;j<b;j++){
-			cout<<"#";
+			std::cout<<"#";
 		}
 	}
 };
