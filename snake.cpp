@@ -1,7 +1,10 @@
 #include<iostream>
+#include <termios.h>
 #include<fstream>
 #include <time.h>
+#include <unistd.h>
 #include <stdlib.h>
+#include <fcntl.h>
 #include <chrono>
 #include <thread>
 #include "got.h"
@@ -15,6 +18,9 @@
 #define LEFT 2
 #define RIGHT 4
 
+using namespace std::this_thread; // sleep_for, sleep_until
+using namespace std::chrono;
+
 class TheGame
 {
 public:
@@ -22,6 +28,7 @@ public:
 	int pointer_pos,initial_pos;
 	time_t initial;
 	int no,dir;
+	int details_x,details_y;
 
 	struct snake_body{
 		int x,y;
@@ -39,6 +46,8 @@ public:
 	TheGame(){
 		pointer_pos=initial_pos=23;
 		treat=(struct trt*)malloc(sizeof(struct trt));
+		details_x=0;
+		details_y=0;
 	}
 
 	void pointer(){
@@ -125,14 +134,13 @@ public:
 		inital_parameter();
 		gotoxy(0,2);
 		game_display();
-		//location_disp();
+		location_disp();
+		game_movement();
+		//wait_time(1);
 		//game_movement();
 		//wait_time(1);
-		usleep(1000000);
-		game_movement();
-
-		//location_disp();
-		game_display();
+		location_disp();
+		//game_display();
 		getoxy(0,100);
 	}
 
@@ -157,10 +165,45 @@ public:
 
 	void game_display(){
 		box();
+		clear_box();
 		snake_head_up();
-		//snake_bodypart_disp(no);
-		//snake_bodypart_disp(no);
+		snake_bodypart_disp(no);
+		snake_bodypart_disp(no);
 		disp_treat();
+	}
+
+	void clear_box(){
+		int x=41,y=15;//68,112
+		for(y=15;y<43;y++){
+			for (x=41;x<139;x++){
+				getoxy(x,y);
+				std::cout<<" ";
+			}
+		}
+		getoxy(0,100);
+	}
+
+	void box(){
+		gotoxy(40,14);
+		int l=30;//Length means height
+		int b=100;//Breadth means width
+		for(int i=0;i<b;i++){
+			std::cout<<"#";
+		}
+		std::cout<<endl;
+		int i;
+		for(i=0;i<l-2;i++){
+			gotoxy(40,15+i);
+			std::cout<<"#";
+			for(int j=0;j<b-2;j++){
+				std::cout<<" ";
+			}
+			std::cout<<"#"<<endl;
+		}
+		gotoxy(40,15+i);
+		for(int j=0;j<b;j++){
+			std::cout<<"#";
+		}
 	}
 
 	void snake_head_up(){
@@ -296,6 +339,7 @@ public:
 	}
 
 	void location_disp(){
+		getoxy(details_x,details_y);
 		struct snake_body* nav=start;
 		while(1){
 			std::cout<<nav->x<<'\t'<<nav->y<<endl;
@@ -304,35 +348,13 @@ public:
 			else
 				nav=nav->next;
 		}
-	}
-
-	void box(){
-		system("clear");
-		gotoxy(40,14);
-		int l=30;
-		int b=100;
-		for(int i=0;i<b;i++){
-			std::cout<<"#";
-		}
-		std::cout<<endl;
-		int i;
-		for(i=0;i<l-2;i++){
-			gotoxy(40,15+i);
-			std::cout<<"#";
-			for(int j=0;j<b-2;j++){
-				std::cout<<" ";
-			}
-			std::cout<<"#"<<endl;
-		}
-		gotoxy(40,15+i);
-		for(int j=0;j<b;j++){
-			std::cout<<"#";
-		}
+		details_y+=2;
 	}
 };
 
 int main(){
 	srand(time(NULL));
+	system("clear");
 	TheGame newgame;
 	newgame.run_game();
 }
