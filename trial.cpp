@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <termios.h>
 #include <unistd.h>
+#include "got.h"
 #include <fcntl.h>
 #include "swap.h"
 #include <chrono>
 #include <thread>
+#include"getch.h"
+#define getoxy gotoxy
 
 // int main(void)
 // {
@@ -14,11 +17,10 @@
 // 	std::cout <<i<<endl<<j<<'\n';
 // }
 int main() {
-    using namespace std::this_thread; // sleep_for, sleep_until
-    using namespace std::chrono; // nanoseconds, system_clock, seconds
-	std::cout<<"Hi"<<endl;
-    std::this_thread::sleep_for(seconds(1));
-    std::cout<<"10 nanoseconds"<<endl;
-    sleep_until(system_clock::now() + seconds(1));
-    std::cout<<"1second and 10 nanoseconds"<<endl;
+	system("clear");
+	cout<<"Hi";
+	gotoxy(0,0);
+	char c= getch();
+	gotoxy(0,3);
+	cout<<c;
 }

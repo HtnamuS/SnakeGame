@@ -132,55 +132,18 @@ public:
 	void run_game(){
 		initial=time(NULL);
 		inital_parameter();
+		box();
 		gotoxy(0,2);
-		game_display();
-		location_disp();
+		//game_display();
+		//location_disp();
 		game_movement();
-		//wait_time(1);
+		sleep(1);
 		//game_movement();
 		//wait_time(1);
-		location_disp();
-		//game_display();
+		//location_disp();
+		game_display();
 		getoxy(0,100);
-	}
-
-	void inital_parameter(){
-		dir=UP;
-		struct snake_body* p;
-		start=p=(struct snake_body*)malloc(sizeof(struct snake_body));
-		p->x= rand()%80+10+40;
-		p->y=rand()%10+10+14;
-		start->prev=NULL;
-		start->next=NULL;
-		no=2;
-		new_treat_pos();
-		snake_bodypart(2);
-		snake_bodypart(3);
-	}
-
-	void new_treat_pos(){
-		treat->x=rand()%98+41;
-		treat->y=rand()%28+15;
-	}
-
-	void game_display(){
-		box();
-		clear_box();
-		snake_head_up();
-		snake_bodypart_disp(no);
-		snake_bodypart_disp(no);
-		disp_treat();
-	}
-
-	void clear_box(){
-		int x=41,y=15;//68,112
-		for(y=15;y<43;y++){
-			for (x=41;x<139;x++){
-				getoxy(x,y);
-				std::cout<<" ";
-			}
-		}
-		getoxy(0,100);
+		cout<<"Hi"<<endl;
 	}
 
 	void box(){
@@ -204,6 +167,44 @@ public:
 		for(int j=0;j<b;j++){
 			std::cout<<"#";
 		}
+	}
+
+	void inital_parameter(){
+		dir=UP;
+		struct snake_body* p;
+		start=p=(struct snake_body*)malloc(sizeof(struct snake_body));
+		p->x= rand()%80+10+40;
+		p->y=rand()%10+10+14;
+		start->prev=NULL;
+		start->next=NULL;
+		no=2;
+		new_treat_pos();
+		snake_bodypart(2);
+		snake_bodypart(3);
+	}
+
+	void new_treat_pos(){
+		treat->x=rand()%98+41;
+		treat->y=rand()%28+15;
+	}
+
+	void game_display(){
+		clear_box();
+		snake_head_up();
+		snake_bodypart_disp(no);
+		snake_bodypart_disp(no);
+		disp_treat();
+	}
+
+	void clear_box(){
+		int x=41,y=15;//68,112
+		for(y=15;y<43;y++){
+			for (x=41;x<139;x++){
+				getoxy(x,y);
+				std::cout<<" ";
+			}
+		}
+		getoxy(0,100);
 	}
 
 	void snake_head_up(){
@@ -357,4 +358,8 @@ int main(){
 	system("clear");
 	TheGame newgame;
 	newgame.run_game();
+	char ch=getch();
+	while(ch!='q' && ch!='Q'){
+		ch=getch();
+	}
 }
